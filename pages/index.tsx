@@ -134,7 +134,7 @@ const Home: NextPage = () => {
               variant="outline"
               w="fit-content"
               alignSelf="center"
-              isLoading={isSubscribing || isRegistering}
+              isLoading={isSubscribing}
               loadingText="Subscribing..."
               isDisabled={!Boolean(address) || !Boolean(account)}
             >

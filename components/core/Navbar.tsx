@@ -7,6 +7,7 @@ function Navbar() {
     <Flex alignItems="center" justifyContent={"space-between"} w="full">
       <Flex gap={4} alignItems="center">
         <NavLink href="/">Home</NavLink>
+        <NavLink href="/preferences">Notification settings</NavLink>
       </Flex>
       <w3m-button label="Connect Wallet" balance="show" />
     </Flex>

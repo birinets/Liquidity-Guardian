@@ -17,6 +17,11 @@ export const NavLink = (props: Props) => {
   );
   const hoverBg = useColorModeValue("gray.200", "gray.700");
 
+  const handleClick = (e: any) => {
+    e.preventDefault()
+    router.push(href)
+  }
+ 
   return (
     <Button
       variant="outline"
@@ -28,6 +33,7 @@ export const NavLink = (props: Props) => {
         textDecoration: "none",
         bg: hoverBg,
       }}
+      onClick={handleClick}
       href={href}
       isActive={isActive}
     >

@@ -8,25 +8,25 @@ import {
   AlertIcon,
   AlertTitle,
   Box,
+  Button,
   CloseButton,
   Flex,
   Heading,
-  Image,
   Text,
 } from "@chakra-ui/react";
 import { useMessages, useW3iAccount } from "@web3inbox/widget-react";
 import Link from "next/link";
 import React from "react";
 
-function Messages() {
+function Notifications() {
   const { account } = useW3iAccount();
-  const { messages, deleteMessage } = useMessages(account);
+  const { messages: notifications, deleteMessage: deleteNotification } = useMessages(account);
 
   return (
     <AccordionItem>
       <AccordionButton>
         <Heading fontSize="md" as="span" flex="1" textAlign="left">
-          Last Messages
+          Last notifications
         </Heading>
         <AccordionIcon />
       </AccordionButton>
@@ -38,39 +38,35 @@ function Messages() {
           gap={2}
           position={"relative"}
         >
-          {!messages?.length ? (
-            <Text>No messages yet.</Text>
+          {!notifications?.length ? (
+            <Text>No notifications yet.</Text>
           ) : (
-            messages
+            notifications
               .sort((a, b) => b.id - a.id)
-              .map(({ id, message }) => (
+              .map(({ id, message: notification }) => (
                 <Alert
                   as={Link}
-                  href={message.url}
+                  href={notification.url}
                   target="_blank"
                   key={id}
                   status="info"
                   colorScheme={
-                    message.type === "transactional" ? "blue" : "purple"
+                    notification.type === "transactional" ? "blue" : "purple"
                   }
                   rounded="xl"
                 >
                   <AlertIcon />
 
                   <Flex flexDir={"column"} flexGrow={1}>
-                    <AlertTitle>{message.title}</AlertTitle>
+                    <AlertTitle>{notification.title}</AlertTitle>
                     <AlertDescription flexGrow={1}>
-                      {message.body}
+                      {notification.body}
                     </AlertDescription>
                   </Flex>
                   <Flex w="60px" justifyContent="center">
-                    <Image
-                      src={message.icon}
-                      alt="notification image"
-                      height="60px"
-                      rounded="full"
-                      alignSelf="center"
-                    />
+                    <Button onClick={() => window.open(notification.url, '_blank', 'noopener,noreferrer')}>
+                      Go
+                    </Button>
                   </Flex>
                   <CloseButton
                     alignSelf="flex-start"
@@ -79,7 +75,7 @@ function Messages() {
                     top={-1}
                     onClick={async (e) => {
                       e.preventDefault();
-                      deleteMessage(id);
+                      deleteNotification(id);
                     }}
                   />
                 </Alert>
@@ -91,4 +87,4 @@ function Messages() {
   );
 }
 
-export default Messages;
+export default Notifications;

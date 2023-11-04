@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
-  AccordionItem,
-  AccordionButton,
   Heading,
-  AccordionIcon,
-  AccordionPanel,
   VStack,
   FormControl,
   FormLabel,
   Switch,
   Button,
   useToast,
+  Flex,
 } from "@chakra-ui/react";
 import { BiSave } from "react-icons/bi";
 import { useForm } from "react-hook-form";
@@ -59,14 +56,11 @@ function Preferences() {
   }, [scopes, setValue]);
 
   return (
-    <AccordionItem>
-      <AccordionButton>
-        <Heading as="span" fontSize="md" flex="1" textAlign="left">
-          Preferences
-        </Heading>
-        <AccordionIcon />
-      </AccordionButton>
-      <AccordionPanel pb={4} display="flex" flexDir="column">
+    <>
+      <Heading as="span" fontSize="md" flex="1" textAlign="left">
+      Preferences
+      </Heading>
+      <Flex pb={4} display="flex" flexDir="column">
         <VStack as="form" onSubmit={onSubmitPreferences}>
           {Object.entries(scopes)?.map(([scopeKey, scope]) => {
             return (
@@ -98,8 +92,8 @@ function Preferences() {
             Save preferences
           </Button>
         </VStack>
-      </AccordionPanel>
-    </AccordionItem>
+      </Flex>
+    </>
   );
 }
 

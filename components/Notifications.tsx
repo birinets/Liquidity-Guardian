@@ -49,7 +49,7 @@ function Notifications() {
                   href={notification.url}
                   target="_blank"
                   key={id}
-                  status="info"
+                  status="warning"
                   colorScheme={
                     notification.type === "transactional" ? "blue" : "purple"
                   }
